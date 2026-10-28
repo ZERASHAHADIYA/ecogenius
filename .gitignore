@@ -1,0 +1,35 @@
+# Node dependencies & build output
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.vite/
+**/.vite/
+
+# Python virtual environments & bytecode
+venv/
+**/venv/
+venv_*/
+**/venv_*/
+env/
+**/env/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Environment files & secrets
+.env
+**/.env
+.env.local
+**/.env.local
+
+# IDE, OS, & Logs
+.vscode/
+**/.vscode/
+.idea/
+**/.idea/
+.DS_Store
+Thumbs.db
+*.log

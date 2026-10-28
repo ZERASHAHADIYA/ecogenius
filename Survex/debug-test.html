@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Test</title>
+</head>
+<body>
+    <h1>Backend Connection Test</h1>
+    <button onclick="testHealth()">Test Health Endpoint</button>
+    <button onclick="testRegister()">Test Registration</button>
+    <div id="results"></div>
+
+    <script>
+        async function testHealth() {
+            const results = document.getElementById('results');
+            try {
+                const response = await fetch('http://localhost:5000/health');
+                const data = await response.json();
+                results.innerHTML = `<p style="color: green;">✅ Health Check: ${JSON.stringify(data)}</p>`;
+            } catch (error) {
+                results.innerHTML = `<p style="color: red;">❌ Health Check Failed: ${error.message}</p>`;
+            }
+        }
+
+        async function testRegister() {
+            const results = document.getElementById('results');
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: 'Test User',
+                        email: 'test@student.college.edu',
+                        password: 'password123',
+                        role: 'student',
+                        department: 'Computer Science',
+                        year: '3rd Year'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    results.innerHTML += `<p style="color: green;">✅ Registration Success!: ${JSON.stringify(data)}</p>`;
+                } else {
+                    results.innerHTML += `<p style="color: orange;">⚠️ Registration Response: ${JSON.stringify(data)}</p>`;
+                }
+            } catch (error) {
+                results.innerHTML += `<p style="color: red;">❌ Registration Failed: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
